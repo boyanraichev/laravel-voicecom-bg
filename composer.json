@@ -1,0 +1,36 @@
+{
+    "name": "boyo/voicecom",
+    "description": "Send SMS notification with Voicecom Bulgaria",
+    "keywords": ["laravel", "notifications", "sms"],
+    "homepage": "https://github.com/boyanraichev/laravel-voicecom",
+    "authors": [
+        {
+            "name": "Boyan Raichev",
+            "email": "myself@boyanr.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "laravel/framework": ">=5.5",
+        "guzzlehttp/guzzle": "^6.3",
+        "boyo/bulglish": "*"
+    },
+    "autoload": {
+		"psr-4": {
+			"Boyo\\Voicecom\\": "src/"
+    	}
+	},
+    "extra": {
+	    "laravel": {
+	        "providers": [
+	            "Boyo\\Voicecom\\VoicecomServiceProvider"
+	        ],
+	        "aliases": {
+		        "VoicecomChannel": "Boyo\\Voicecom\\VoicecomChannel"
+	        }
+	    },
+        "branch-alias" : {
+            "dev-master" : "1.0-dev"
+        }
+    }
+}
