@@ -2,7 +2,7 @@
 
 namespace Boyo\Voicecom;
 
-use Boyo\Voiceom\Exceptions\CouldNotSendMessage;
+use Boyo\Voicecom\Exceptions\CouldNotSendMessage;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 use Bulglish;
