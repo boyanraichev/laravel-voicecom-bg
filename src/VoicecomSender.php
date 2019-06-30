@@ -30,7 +30,7 @@ class VoicecomSender
 		
 		// settings
 		$this->sid = config('services.voicecom.sid');
-		$this->driver = config('services.voicecom.driver');
+		$this->prefix = config('services.voicecom.prefix');		
 		$this->log = config('services.voicecom.log');
 		$this->send = config('services.voicecom.send');
 		$this->log_channel = config('services.voicecom.log_channel');
