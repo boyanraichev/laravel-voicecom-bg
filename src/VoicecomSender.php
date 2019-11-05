@@ -25,6 +25,8 @@ class VoicecomSender
 	
 	private $prefix = '';
 	
+	private $limitLength = true;
+	
 	// construct
 	public function __construct() {
 		
@@ -34,6 +36,10 @@ class VoicecomSender
 		$this->log = config('services.voicecom.log');
 		$this->send = config('services.voicecom.send');
 		$this->log_channel = config('services.voicecom.log_channel');
+		
+		if(!empty(config('services.voicecom.allow_multiple'))) {
+			$this->limitLength = false;
+		}
 		
 		// setup Guzzle client
 		$this->client = new Client(['base_uri' => $this->url]);
@@ -49,8 +55,19 @@ class VoicecomSender
 		return $tel;
 	}
 	
+	private function cutText($text) {
+	        
+		if (mb_strlen($text) <= 160) return $text;
+		
+		$text = mb_substr($text, 0, ($cutoff-3));
+		$text .= '...';    
+        
+        return $return;
+	}
+	
 	// check limit
 	public function checkLimit() {
+		
 		$url = $this->url . 'index.php?sid='.$this->sid.'&check_limit=1';
 		$response = wp_remote_get( $url ); 
 		return $response;
@@ -65,21 +82,24 @@ class VoicecomSender
 			$message->build();
 			
 			if (empty($message->to)) { 
-// 				throw new \Exception('Cannot send without number');
 	            throw CouldNotSendMessage::telNotProvided();				
 			}
 			
 			if (empty($message->message)) { 
-// 				throw new \Exception('Cannot send without content');
 	            throw CouldNotSendMessage::contentNotProvided();				
 			}
 			
 			$message_processed = Bulglish::toLatin( $this->prefix . $message->message );
 			
+			if ($this->limitLength) {
+				$message_processed = $this->cutText($message_processed);
+			}
+			
+/*
 			if (mb_strlen($message_processed) > 160) {
-// 				throw new \Exception('Max length');
 	            throw CouldNotSendMessage::maxLengthExceeded();
 	        }
+*/
 			
 			$args = [
 				'sid' => $this->sid,
@@ -117,4 +137,6 @@ class VoicecomSender
 		}
 		
 	}
+	
+	
 }

@@ -1,7 +1,7 @@
 {
     "name": "boyo/voicecom",
     "description": "Send SMS notification with Voicecom Bulgaria",
-    "keywords": ["laravel", "notifications", "sms"],
+    "keywords": ["laravel", "notifications", "sms", "voicecom"],
     "homepage": "https://github.com/boyanraichev/laravel-voicecom",
     "authors": [
         {
