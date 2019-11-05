@@ -57,12 +57,14 @@ class VoicecomSender
 	
 	private function cutText($text) {
 	        
-		if (mb_strlen($text) <= 160) return $text;
+		if (mb_strlen($text) > 160) {
 		
-		$text = mb_substr($text, 0, 157);
-		$text .= '...';    
-        
-        return $return;
+			$text = mb_substr($text, 0, 157);
+			$text .= '...';    
+			
+		}
+		
+        return $text;
 	}
 	
 	// check limit
