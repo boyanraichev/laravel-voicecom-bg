@@ -59,7 +59,7 @@ class VoicecomSender
 	        
 		if (mb_strlen($text) <= 160) return $text;
 		
-		$text = mb_substr($text, 0, ($cutoff-3));
+		$text = mb_substr($text, 0, 157);
 		$text .= '...';    
         
         return $return;
