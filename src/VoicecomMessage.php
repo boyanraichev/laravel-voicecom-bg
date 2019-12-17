@@ -28,6 +28,13 @@ class VoicecomMessage
     public $id = '';
     
     /**
+     * The prefix - overwrites global
+     *
+     * @var string
+     */
+    public $prefix = false;
+    
+    /**
      * @param  string $message
      * @param  string $id
      */

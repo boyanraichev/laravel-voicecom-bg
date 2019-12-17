@@ -91,7 +91,7 @@ class VoicecomSender
 	            throw CouldNotSendMessage::contentNotProvided();				
 			}
 			
-			$message_processed = Bulglish::toLatin( $this->prefix . $message->message );
+			$message_processed = Bulglish::toLatin( ( $message->prefix !== false ? $message->prefix : $this->prefix ) . $message->message );
 			
 			if ($this->limitLength) {
 				$message_processed = $this->cutText($message_processed);
